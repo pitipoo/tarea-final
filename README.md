@@ -33,6 +33,8 @@ The browser sends the JWT in the `Authorization: Bearer` header and keeps it in 
 
 The root `index.js` exports the Express app for Vercel's zero-configuration Express deployment, and `public/` is served from Vercel's CDN. Connect the GitHub repository to Vercel and deploy from the repository root with the included `vercel.json`. Set `BOOTSTRAP_ADMIN_EMAIL`, `BOOTSTRAP_ADMIN_PASSWORD`, `JWT_SECRET`, and `PUBLIC_URL` in the Vercel project's environment settings. Configure SMTP variables too if you want password-recovery links delivered by email. Redeploy after adding or changing production environment variables.
 
+The Vercel project uses Node.js 22.x for the native SQLite dependency; the package supports Node.js 20 and 22.
+
 **This Vercel configuration uses temporary SQLite storage in `/tmp`, as requested for a demo. It is not suitable for real accounts or production data:** the filesystem is ephemeral, and separate serverless instances do not share their session registry. Database contents can disappear on a cold start or deployment, and the two-device limit is not globally reliable across instances. For a persistent production deployment, migrate to a shared Postgres database (for example Neon) before inviting users.
 
 The initial administrator is only created when both bootstrap variables are configured. New registrations are standard users. Never store real passwords or sensitive data in a temporary demo.
